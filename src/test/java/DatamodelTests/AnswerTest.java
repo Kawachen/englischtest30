@@ -14,13 +14,23 @@ public class AnswerTest {
     private int testChosenAnswer1 = 2;
     private int testChosenAnswer2 = 3;
     private int testChosenAnswer3 = 0;
+    private String testQuestionPhrase = "sampleQuestion";
+    private String testGrammarSection = "sampleSection";
+    private String testExercise = "sampleCise";
+
+    private String testPossibleAnswer1 = "sample1";
+    private String testPossibleAnswer2 = "sample2";
+
+    private int testCorrectAnswer1 = 0;
 
     @Test
     public void testCreateAnswerObject() {
         Answer answer = new Answer();
         assertEquals(Answer.class, answer.getClass());
-       // Answer answer2 = new Answer(testQuestionId);
-       // assertEquals(testQuestionId, answer2.getQuestionId());
+        ArrayList<String> possibleAnswers = new ArrayList<>();
+        ArrayList<Integer> correctAnswers = new ArrayList<>();
+        Answer answer2 = new Answer(testQuestionId, testQuestionPhrase, testGrammarSection, testExercise, possibleAnswers, correctAnswers);
+        assertEquals(testQuestionId, answer2.getQuestionId());
     }
 
     @Test
@@ -49,5 +59,15 @@ public class AnswerTest {
         assertEquals(testChosenAnswer1, (int) answer.getChosenAnswers().get(0));
         assertEquals(testChosenAnswer2, (int) answer.getChosenAnswers().get(1));
         assertEquals(testChosenAnswer3, (int) answer.getChosenAnswers().get(2));
+    }
+
+    @Test
+    public void testAddPossibleAndCorrectAnswer() {
+        Answer answer = new Answer();
+        answer.addPossibleAnswer(testPossibleAnswer1);
+        answer.addPossibleAnswer(testPossibleAnswer2);
+        answer.addCorrectAnswer(testCorrectAnswer1);
+        assertEquals(2, answer.getPossibleAnswers().size());
+        assertEquals(1, answer.getCorrectAnswers().size());
     }
 }
